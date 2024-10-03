@@ -101,4 +101,12 @@ MongoDB
 
 
 
-
+TODO:
+----
+  1. Implement DELETE method
+  2. Implement PUT method and get the updated employee details
+  3. Use this api url in react app
+  4. Implement the following routes for authentication 
+      - Signup      localhost:3001/api/v1/auth/signup
+      - Login       localhost:3001/api/v1/auth/login
+      
