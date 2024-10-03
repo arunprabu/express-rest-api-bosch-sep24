@@ -1,52 +1,44 @@
+// establishing connection with db
+const Employee = require("../models/employees.model");
 
 exports.getEmployees = (req, res) => {
   // 1. get the request from routes
-  // 2. connect to database
-  // 3. get all employees from the database
-  // 4. send the employee list to the routes
-  const employeeList = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      phone: "1234567890",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      email: "janedoe@gmail.com",
-      phone: "9876543210",
-    },
-  ];
-  res.json(employeeList);
-} 
+  Employee.find()
+    .then((employees) => {
+      res.json(employees);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+};
 
 exports.addEmployee = (req, res) => {
   // 1. get the request from routes and req.body
-  // 2. connect to database
+  console.log(req.body);
+  // 2. connect to database [ DONE -- Refer Line number 1]
   // 3. add the employee to the database
-  // 4. send the employee details to the routes
-  // get the form data from the request body
-  console.log(req.body); // because of body-parser middleware -- we can get this data
-  // construct a new employee object as response
-  res.json({
-    ...req.body,
-    id: 100,
-  });
-}
+  const employeeDao = new Employee(req.body);
+  employeeDao
+    .save()
+    .then((employee) => {
+      res.json(employee); // 4. send the positive response to the routes
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message }); // 4. send the error response to the routes
+    });
+};
 
 exports.getEmployeeDetails = (req, res) => {
   // id is the url parameter
   console.log(req.params); // we can get the id from the url parameter
-  // get the employee details from the database
-  const employee = {
-    id: parseInt(req.params.id),
-    name: "John Doe",
-    email: "johndoe@gmail.com",
-    phone: "1234567890",
-  };
-  res.json(employee);
-}
+  Employee.findOne({ _id: req.params.id })
+    .then((employee) => {
+      res.json(employee);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+};
 
 exports.updateEmployeeDetails = (req, res) => {
   // get the url parameter
@@ -55,13 +47,16 @@ exports.updateEmployeeDetails = (req, res) => {
   // get the form data from the request body
   console.log(req.body);
 
-  const updatedEmployee = {
-    id: parseInt(req.params.id),
-    ...req.body,
-  };
-
-  // update the employee details in the database
-  res.json(updatedEmployee);
-}
+  Employee.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    .then((employee) => {
+      // old employee details will come
+      // TODO: get the recently updated employee details. fix it in line number 50
+      console.log(employee);
+      res.json(employee);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+};
 
 // TODO: Do it for DELETE method

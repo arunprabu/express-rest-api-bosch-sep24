@@ -2,9 +2,9 @@
 Database - Quick Intro 
 ------------------
   DB Server 
-    - Host / IP address (localhost)
-    - Port 
-    - Credentials 
+    - Host / IP address (localhost / 127.0.0.1)
+    - Port : 27017
+    - Credentials (username / password)
 
   DB Clients
   -----
@@ -12,15 +12,22 @@ Database - Quick Intro
         * MongoDB Shell  (Download from MongoDB website)
           -- then launch the shell from command line using the command 'mongosh'
     * GUI Clients (GUI)  
-        - MongoDB Compas
-        - Robo 3T or Studio 3T
+        - MongoDB Compass [DONE]
+        - Robo 3T or Studio 3T [DONE]
 
     * Programming Clients
+        Official MongoDB Driver for Node.js (npm install mongodb)   -- or else use Mongoose
+        Mongoose is a Node.js ODM (Object Document Mapper) for MongoDB (npm i mongoose)
+         * mongoose is offering the schema definition and validation
+
+       
 
 Types of Databases
 ----
   1. Relational Databases (RDBMS)
       Preferred for Structured Data 
+      * These are Schema based databases  
+      * Meant for storing data in tables with predefined schemas.
       Examples: Oracle, MySQL, PostgreSQL, SQL Server, MariaDB
       Query Language: SQL
 
@@ -32,6 +39,9 @@ Types of Databases
 
   2. NoSQL Databases
       Preferred for Unstructured Data
+      * These are Document based databases
+      * Meant for storing data in collections with no predefined schemas. 
+      * Schema-less data storage.
       Examples: MongoDB
       Query Language: JavaScript
 
@@ -40,7 +50,6 @@ Types of Databases
         Data will be stored in Documents.
         Documents will have fields and values.
 
-      
 
 
 
@@ -69,16 +78,19 @@ MongoDB
     db.employees.insertOne({name: "Jane", city: "London"})
     db.employees.insertOne({age: 45, skillset: ['angular', 'react', 'js', 'nodejs']})
 
-  To read all documents  (READ)
+  To read all documents  (READ) -- will return array of documents
     db.employees.find()
+    db.employees.find({})
 
   To read a single document  (READ)
     db.employees.findOne({name: 'Jane'})
-    db.employees.find({_id: ObjectId('66fb9ce2cad981a7c0d3ca16')})
+    db.employees.findOne({_id: ObjectId('66fb9ce2cad981a7c0d3ca16')})
 
   To Update a document  (UPDATE)
     db.employees.updateOne({name: 'Jane'}, {$set: {city: 'Sydney'}})
     db.employees.updateOne({name: 'John'}, {$set: {phone: 24536788}})
+
+  To Delete a document  (DELETE -- TODO)
 
   
 
