@@ -17,7 +17,7 @@ exports.addEmployee = (req, res) => {
   console.log(req.body);
   // 2. connect to database [ DONE -- Refer Line number 1]
   // 3. add the employee to the database
-  const employeeDao = new Employee(req.body);
+  const employeeDao = new Employee(req.body); // draft 
   employeeDao
     .save()
     .then((employee) => {

@@ -1,4 +1,6 @@
 
+
+
 Database - Quick Intro 
 ------------------
   DB Server 
@@ -110,3 +112,47 @@ TODO:
       - Signup      localhost:3001/api/v1/auth/signup
       - Login       localhost:3001/api/v1/auth/login
       
+
+
+Authentication
+----
+  Authentication is the process of verifying the identity of a user.
+
+  2 types of Authentication
+    1. Session Based Authentication
+      * whenever the user is logged in session id is generated
+      * session id is stored in the server [PROBLEM]
+      * session id will be sent to the browser also from the server
+      * browser should save it and upon every request to the server the session id should be sent
+      * server will verify the sessionid from browser with the one kept in server. if valid, you can gain access. 
+
+      * when the user logs out the session id is destroyed
+
+    2. Token Based Authentication [Modern]
+        * whenever the user is logged in token is generated
+        * token will be sent to the browser 
+        * browser should save it and upon every request to the server the token should be sent
+        * server will verify the token from browser. if valid, you can gain access.
+
+        * when the user logs out the token from browser is destroyed
+
+
+
+  Authentication Implementation Strategies  
+    1. Local Strategy [Will learn]
+      - Email and Password
+      - verify the email 
+
+    2. OAuth Strategy
+      - Facebook, Google, Twitter, Github, LinkedIn etc. 
+      - email verification is not required
+
+
+  
+
+Integrate PassportJS with Express
+---
+  1. Install passport
+    npm install passport passport-local
+
+  

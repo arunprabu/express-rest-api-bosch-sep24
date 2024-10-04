@@ -3,7 +3,7 @@
 const mongoose = require("./mongo");
 
 // Let's have the schema for the collection
-const EmployeeSchema = new mongoose.Schema(
+const employeeSchema = new mongoose.Schema(
   {
     name: String,
     email: {
@@ -20,8 +20,7 @@ const EmployeeSchema = new mongoose.Schema(
   {
     strict: false, // if true only the fields specified in the schema will be saved to the database
   },
-
 );
 
 // Employee -- will become plural automatically. it is the collection name
-module.exports = mongoose.model("Employee", EmployeeSchema);
+module.exports = mongoose.model("Employee", employeeSchema);

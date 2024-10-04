@@ -8,10 +8,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 // package for logging
 const logger = require('morgan');
+// importing official passport
+const passport = require('passport');
+require("./config/passport.config");
 
 // custom imports
 const indexRouter = require('./routes/index');
 const employeesRouter = require("./routes/api/v1/employees");
+const authRouter = require("./routes/api/v1/auth");
 
 const app = express();
 
@@ -29,11 +33,15 @@ app.use(cookieParser());
 // static files are served from the public folder. example files are images, css, js, fonts
 app.use(express.static(path.join(__dirname, 'public')));
 
+// setting up auth middleware
+passport.initialize();
+
 // routes a.k.a urls / api endpoints are defined here
 app.use('/', indexRouter); // localhost:3001/
 
 // Configuring REST API Endpoints
 app.use("/api/v1/employees", employeesRouter);
+app.use("/api/v1/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
