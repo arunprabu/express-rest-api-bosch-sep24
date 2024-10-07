@@ -143,7 +143,7 @@ Authentication
       - Email and Password
       - verify the email 
 
-    2. OAuth Strategy
+    2. OAuth2 Strategies
       - Facebook, Google, Twitter, Github, LinkedIn etc. 
       - email verification is not required
 

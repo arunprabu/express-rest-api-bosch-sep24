@@ -1,3 +1,4 @@
+const passport = require('passport');
 const User = require("../models/auth.model");
 
 exports.signup = (req, res) => {
@@ -25,6 +26,23 @@ exports.login = (req, res) => {
   // 1. get the form data
   console.log(req.body);
   
-  // res.json({ message: "login successful" });
+  passport.authenticate('local', (err, user, info) => {
+    // if user not found -- or password is wrong
+    if(err) {
+      console.log(err);
+      res.json(err);
+    } 
+
+    // if the user account is found
+    if(user) {
+      // generate JWT (JSON Web Token) and send it as res 
+      console.log(user);
+      const authToken = user.generateJwt();
+      res.json({
+        authToken: authToken,
+      });
+    }
+  })(req, res);
+  
 }
 

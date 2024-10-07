@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 const mongoose = require("./mongo");
 
 // Let's have the schema for the collection
@@ -28,7 +29,7 @@ const userSchema = new mongoose.Schema(
 
 // to convert the password into salt and hash 
 userSchema.methods.encryptPassword = function (password) {
-  // it should not be arrow function
+  // it should not be arrow function. if so, 'this' keyword wont be available
   // let's get the password
   console.log(password);
   // convert the above password into salt and hash
@@ -54,6 +55,22 @@ userSchema.methods.isPasswordMatching = function(password) {
 }
 
 // generate token
+userSchema.methods.generateJwt = function() {
+  // today's date and time
+  const tokenExpiryDate = new Date(); 
+  tokenExpiryDate.setDate(tokenExpiryDate.getDate() + 90); // setting 90 days
+  console.log(tokenExpiryDate);
+
+  // signing the payload with secret
+  return jwt.sign({
+    id: this._id, // user's id saved in db
+    email: this.email,
+    // JWT expects expiry time to be in seconds; not milliseconds. 
+    // by dividing the millisoconds by 1000, we can get the seconds.
+    // 10 is radix -- that will give full number. not floating point.
+    exp: parseInt(tokenExpiryDate.getTime() / 1000, 10), 
+  }, "Life Is Beautiful!!!"); // secret  
+}
 
 
 

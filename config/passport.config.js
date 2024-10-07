@@ -1,5 +1,5 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local"); // email, password based auth
 
 const User = require("../models/auth.model");
 
