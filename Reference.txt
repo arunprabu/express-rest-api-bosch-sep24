@@ -13,14 +13,21 @@ Database - Quick Intro
     * Shell Clients (CLI)
         * MongoDB Shell  (Download from MongoDB website)
           -- then launch the shell from command line using the command 'mongosh'
+
+        
     * GUI Clients (GUI)  
         - MongoDB Compass [DONE]
         - Robo 3T or Studio 3T [DONE]
+
+        -- pgAdmin 4 -- PostgreSQL GUI client 
 
     * Programming Clients
         Official MongoDB Driver for Node.js (npm install mongodb)   -- or else use Mongoose
         Mongoose is a Node.js ODM (Object Document Mapper) for MongoDB (npm i mongoose)
          * mongoose is offering the schema definition and validation
+
+        * pg (npm i pg )
+        * Sequelize -- (useful when you want to connect to RDBMS using JS)
 
        
 
@@ -156,3 +163,29 @@ Integrate PassportJS with Express
     npm install passport passport-local
 
   
+
+====
+Check for PostgreSQL installation 
+---
+  psql --version
+
+is it running? 
+---
+  pg_isready
+
+how to start the server?
+---
+  brew services start postgresql (mac only)
+
+in windows
+---
+  cd "C:\Program Files\PostgreSQL\<version>\bin"
+  pg_ctl -D "C:\Program Files\PostgreSQL\<version>\data" start
+
+
+PostgreSQL Clients
+===
+  pgAdmin,  
+
+
+====
