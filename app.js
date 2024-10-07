@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 // importing official passport
 const passport = require('passport');
+const cors = require("cors");
+
 require("./config/passport.config");
 
 // custom imports
@@ -36,6 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // setting up auth middleware
 passport.initialize();
 
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions)); // enabling cors for "http://localhost:3000" only
+
 // routes a.k.a urls / api endpoints are defined here
 app.use('/', indexRouter); // localhost:3001/
 
@@ -56,7 +65,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  // you can send json -- do not render template
+  res.json({
+    message: err.message
+  })
+  // res.render('error');
 });
 
 module.exports = app;

@@ -72,8 +72,5 @@ userSchema.methods.generateJwt = function() {
   }, "Life Is Beautiful!!!"); // secret  
 }
 
-
-
-
 module.exports = mongoose.model("User", userSchema);
 
