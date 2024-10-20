@@ -189,3 +189,19 @@ PostgreSQL Clients
 
 
 ====
+
+
+Build and Deployment 
+====
+  no need to build your project (if it js based)
+  commit the project into github.com 
+  go to deployable environment (aws, google cloud)
+  install NodeJS (even numbered versions only - preferably LTS versions)
+  install git client (github for desktop or gitscm)
+  checkout this project 
+  npm i 
+  npm start 
+
+Scaling
+====
+  
